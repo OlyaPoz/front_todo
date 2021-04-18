@@ -1,10 +1,16 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const httpClient = axios.create({
-  baseURL: 'http://localhost:3000/api'
-})
+const http = axios.create({
+  baseURL: `http://localhost:3000/api`,
+});
 
-export const createTodo = data => httpClient.post('/todos', data)
-export const getTodo = () => httpClient.get('/todos')
-export const updateTodo = ({ data, id }) => httpClient.patch(`/todos/${id}`, data)
-export const deleteTodo = ({ id }) => httpClient.delete(`/todos/${id}`)
+export const getTodos = () =>
+  http.get(`/todo`);
+
+export const createTodo = (todoData) =>
+  http.post(`/todo`, todoData);
+
+export const deleteTodo = ({ id } = {}) =>
+  http.delete(`/todo/${id}`);
+
+export default http;

@@ -1,20 +1,20 @@
-import { lazy, Suspense } from 'react'
-import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+import * as ActionCreators from './actions';
 
-const Home = lazy(() => import('./pages/Home'))
+function App (props) {
+  const dispatch = useDispatch();
 
-function App () {
+  const createTodoAction = todo =>
+    dispatch(ActionCreators.createTodoRequest({ todo }));
+
   return (
     <div>
-      <BrowserRouter>
-        <Suspense fallback='Loading...'>
-          <Switch>
-            <Route path='/' component={} />
-          </Switch>
-        </Suspense>
-      </BrowserRouter>
+      <TodoForm submitHandler={createTodoAction} />
+      <TodoList />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
